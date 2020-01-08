@@ -1,3 +1,10 @@
+## 配置
+
+    TensorRT 5.0.2.6
+    python 3.5
+    cuda 9.0
+    cudnn 7.3.0
+
 ## 1 将darknet模型转化为onnx模型, 打开 yolov3_to_onnx.py, 修改main方法中的参数,然后云溪它
 	python yolov3_to_onnx.py
 
