@@ -26,4 +26,7 @@
     cuda_ctx.pop()
     del cuda_ctx
 
+## 链接
+1 安装cuda cudnn 的方法 https://blog.csdn.net/qq_20265187/article/details/89029011
+2 安装TensorRT的方法,这里使用的是tar包安装 https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/#installing-tar
 
