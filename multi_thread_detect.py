@@ -82,21 +82,16 @@ if __name__ == '__main__':
 
     # camera address
     address = "rtsp://admin:engyne123@192.168.1.64:554//Streaming/Channels/101"
-    # cap = cv2.VideoCapture(address)
     frame_reader = FrameReader(uri=address)
     area_list = [851, 245, 1427, 807] 
     x1, y1, x2, y2 = area_list
 
     t = MyThread(mode=flags.mode)
     t.set_daemon_start()
-    frame_reader.setDaemon(True)
     frame_reader.start()
     index = 0
     while True:
-        # ret, frame = cap.read()
         frame  = frame_reader.get_matrix()
-        # if not ret:
-        #     break
         if frame is None:
             continue
         matrix = frame[y1:y2, x1:x2]
@@ -115,6 +110,5 @@ if __name__ == '__main__':
         if cv2.waitKey(1) & 0xff == 27:
             break
 
-    # cap.release()
     frame_reader.stop()
     t.stop()

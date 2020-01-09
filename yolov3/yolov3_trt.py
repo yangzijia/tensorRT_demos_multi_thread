@@ -13,11 +13,9 @@ import pycuda.autoinit
 
 
 class Yolov3TRT(object):
-    # _defaults = {}
 
     def __init__(self, **kwargs):
-        # self.__dict__.update(self._defaults)  # set up default values
-        self.__dict__.update(kwargs)
+        self.__dict__.update(kwargs)  # set up default values
         self.class_names = self._get_class()
         self.anchors = self._get_anchors()
         self.trt_logger = trt.Logger()
