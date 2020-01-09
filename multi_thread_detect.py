@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from yolov3_trt import Yolov3TRT
+from yolov3.yolov3_trt import Yolov3TRT
+from vgg16.vgg16 import VGG16
 import pycuda.driver as cuda
 
 from threading import Thread, Lock
@@ -11,8 +12,9 @@ import cv2
 
 class MyThread(Thread):
 
-    def __init__(self):
+    def __init__(self, mode=None):
         super().__init__()
+        self.mode = mode
         self.queue = Queue(200)
         self.alive = True
 
@@ -27,12 +29,15 @@ class MyThread(Thread):
         while self.alive:
             try:
                 cuda_ctx = cuda.Device(0).make_context()
-                yolo = Yolov3TRT()
+                if self.mode == "yolov3":
+                    model = Yolov3TRT()
+                elif self.mode == "vgg16":
+                    model = VGG16(overall_model_path="vgg16.uff")
 
                 matrix = self.queue.get(block=True)
 
                 # print detection info
-                yolo.predict(matrix)
+                model.predict(matrix)
 
                 cuda_ctx.pop()
                 del cuda_ctx
@@ -49,15 +54,18 @@ if __name__ == '__main__':
     # camera address
     cap = cv2.VideoCapture(0)
 
-    t = MyThread()
+    t = MyThread(mode="yolov3")
     t.set_daemon_start()
-
+    index = 0
     while True:
         ret, frame = cap.read()
         if not ret:
             break
-
-        t.append_to_queue(frame)
+        index += 1
+        if index in [6, 18]:
+            t.append_to_queue(frame)
+        if index == 25:
+            index = 0
 
         """ display frame """
 
