@@ -13,19 +13,11 @@ import pycuda.autoinit
 
 
 class Yolov3TRT(object):
-    _defaults = {
-        "model_path": os.path.join('classes3', 'classes3.trt'),
-        "anchors_path": os.path.join('classes3', 'train_anchors.txt'),
-        "classes_path": os.path.join('classes3', 'voc_labels.txt'),
-        "model_masks": [(6, 7, 8), (3, 4, 5), (0, 1, 2)],
-        "score": 0.3,         # 对象覆盖的阈值，[0,1]之间
-        "nms_threshold": 0.5,       # nms的阈值，[0,1]之间
-        "model_image_size": (416, 416),
-        "output_shapes": [(1, 24, 13, 13), (1, 24, 26, 26), (1, 24, 52, 52)]
-    }
+    # _defaults = {}
 
-    def __init__(self):
-        self.__dict__.update(self._defaults)  # set up default values
+    def __init__(self, **kwargs):
+        # self.__dict__.update(self._defaults)  # set up default values
+        self.__dict__.update(kwargs)
         self.class_names = self._get_class()
         self.anchors = self._get_anchors()
         self.trt_logger = trt.Logger()
