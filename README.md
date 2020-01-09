@@ -1,5 +1,6 @@
 ## 1、配置
 
+    ubuntu 16.04
     TensorRT 5.0.2.6
     python 3.5
     cuda 9.0
@@ -9,7 +10,7 @@
 
 ### yolov3
 
-#### 将darknet模型转化为onnx模型, 打开 yolov3/darknet_to_onnx.py, 修改main方法中的参数,然后云溪它
+#### 将darknet模型转化为onnx模型, 打开 yolov3/darknet_to_onnx.py, 修改main方法中的参数,然后运行它
 	python yolov3_to_onnx.py
 
 #### 将onnx模型转化为trt模型, 打开 yolov3/onnx_to_tensorrt.py, 修改main方法中的参数,运行
@@ -22,7 +23,7 @@
 
 	cuda_ctx = cuda.Device(0).make_context()    # important
 
-    """  """
+    """ 创建模型类的方法必须要在线程的run方法中 """
     if self.mode == "yolov3":
         model = Yolov3TRT()
     elif self.mode == "vgg16":
@@ -41,7 +42,7 @@
 
 
 ## 3、链接
-1 安装cuda cudnn 的方法 https://blog.csdn.net/qq_20265187/article/details/89029011
+1 [安装cuda和cudnn的方法](https://blog.csdn.net/qq_20265187/article/details/89029011 "安装cuda和cudnn的方法")  
 
-2 安装TensorRT的方法,这里使用的是tar包安装 https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/#installing-tar
+2 [安装TensorRT的方法](https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/#installing-tar "安装TensorRT的方法"),这里使用的是tar包安装 
 
