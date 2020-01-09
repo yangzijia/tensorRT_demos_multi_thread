@@ -35,7 +35,7 @@ class FrameReader(Thread):
     def get_matrix(self):
         return self.matrix
 
-    def start(self):
+    def set_daemon_start(self):
         self.setDaemon(True)
         self.start()
 

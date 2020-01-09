@@ -75,8 +75,8 @@ def h5_to_pb(h5_model, output_dir, model_name, out_prefix="output_", log_tensorb
 
 if __name__ == '__main__':
     #  .h模型文件路径参数
-    input_path = 'models'
-    weight_file = "vgg16_model.h5"
+    input_path = 'aaa'
+    weight_file = "vgg16_weights.h5"
     weight_file_path = os.path.join(input_path, weight_file)
     output_graph_name = weight_file[:-3] + '.pb'
 
