@@ -4,6 +4,7 @@
 from yolov3.yolov3_trt import Yolov3TRT
 from vgg16.vgg16 import VGG16
 import pycuda.driver as cuda
+import argparse
 
 from threading import Thread, Lock
 from queue import Queue
@@ -51,10 +52,19 @@ class MyThread(Thread):
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
+
+    parser.add_argument(
+        '--mode', type=str, default="yolov3",
+        help='vgg16 or yolov3'
+    )
+
+    flags = parser.parse_args()
+
     # camera address
     cap = cv2.VideoCapture(0)
 
-    t = MyThread(mode="yolov3")
+    t = MyThread(mode=flags.mode)
     t.set_daemon_start()
     index = 0
     while True:

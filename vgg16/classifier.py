@@ -9,16 +9,20 @@ import pycuda.driver as cuda
 import pycuda.autoinit
 
 
-class VGG16(object):
+class Classifier(object):
 
-    def __init__(self, overall_model_path=None, model_input_name="input_1", model_output_name="predictions/Softmax"):
+    def __init__(self, overall_model_path=None, 
+                model_input_name="input_1", 
+                model_output_name="predictions/Softmax",
+                input_shape=(3, 224, 224),
+                labels=["normal", "abnormal"]):
         self.model_path = overall_model_path
-        self.input_shape = (3, 224, 224)
+        self.input_shape = input_shape
         self.model_dtype = trt.float32
         self.trt_logger = trt.Logger(trt.Logger.WARNING)
         self.model_input_name = model_input_name
         self.model_output_name = model_output_name
-        self.labels = ["normal", "abnormal"]
+        self.labels = labels
         self.engine = self.build_engine_uff()
         self.tmp_buffers = self.allocate_buffers()
 
