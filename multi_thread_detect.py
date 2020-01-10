@@ -74,7 +74,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(argument_default=argparse.SUPPRESS)
 
     parser.add_argument(
-        '--mode', type=str, default="vgg16",
+        '--mode', type=str, default="yolov3",
         help='vgg16 or yolov3'
     )
 
