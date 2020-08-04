@@ -31,11 +31,11 @@ GTX1080ti
 
 |  类型  | 耗时（ms）    |
 | :-------: | :-------------------: |
-| 准备数据 | 6 | 
+| 准备数据 | 6 |
 | 推理 | 18 |
 |处理结果<br>（将矩阵转化为class name）| 26|
 |画图|1|
-|总时间|51| 
+|总时间|51|
 
 ## 3、运行
 
@@ -73,9 +73,10 @@ GTX1080ti
 
 #### 3.2.1、.h5文件转.pb文件的方法
 
-使用的是vgg16/h5_2_pb.py文件，需要注意的是.h5文件最好是model文件，如果是weights，挺麻烦的
-    
-    python h5_2_pb.py
+请克隆[此处](https://github.com/amir-abdi/keras_to_tensorflow "h5 转 pb的方法")代码，使用下面的命令进行模型的转化
+    python keras_to_tensorflow.py 
+        --input_model="path/to/keras/model.h5" 
+        --output_model="path/to/save/model.pb"
 
 #### 3.2.2、将pb文件转为uff文件，需要你安装好tensorRT的基本包，在terminal下直接运行下面的命令即可
 
